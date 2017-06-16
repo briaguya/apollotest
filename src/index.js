@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const networkInterface = createNetworkInterface({
-  uri: 'https://api.graph.cool/simple/v1/__PROJECT_ID__'
+  uri: 'https://df3yrm54i8.execute-api.us-east-1.amazonaws.com/dev/graphql'
 });
 
 const client = new ApolloClient({
