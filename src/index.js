@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ListPage from './components/ListPage';
-import { Router, Route, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import 'tachyons';
@@ -18,7 +18,7 @@ const client = new ApolloClient({
 
 ReactDOM.render((
   <ApolloProvider client={client}>
-    <Router history={browserHistory}>
+    <Router>
       <Route path='/' component={ListPage} />
     </Router>
   </ApolloProvider>
