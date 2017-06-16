@@ -10,13 +10,15 @@ class ListPage extends React.Component {
       return (<div>Loading</div>)
     }
 
+    console.log(this.props.data.allCrossings);
+
     return (
       <div className='w-100 flex justify-center'>
         <div className='w-100' style={{ maxWidth: 400 }}>
-          {this.props.data.allCrossings.map((crossing) =>
+          {this.props.data.allCrossings.edges.map((crossing) =>
             <Crossing 
-              key={crossing.id}
-              crossing={crossing}
+              key={crossing.node.id}
+              crossing={crossing.node}
               refresh={() => this.props.data.refetch()}
             />
           )}
@@ -32,6 +34,7 @@ query allCrossings {
   allCrossings {
     edges {
       node {
+        id
         name
         latestStatus {
           status

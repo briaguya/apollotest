@@ -12,6 +12,20 @@ const networkInterface = createNetworkInterface({
   uri: 'https://df3yrm54i8.execute-api.us-east-1.amazonaws.com/dev/graphql'
 });
 
+// TODO: Add an auth flow
+const token = "Bearer TOKEN GOES HERE";
+localStorage.setItem('token',token);
+
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    if (!req.options.headers) {
+      req.options.headers = {};  // Create the header object if needed.
+    }
+    req.options.headers['authorization'] = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+    next();
+  }
+}]);
+
 const client = new ApolloClient({
   networkInterface
 });
