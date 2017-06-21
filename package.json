@@ -5,6 +5,9 @@
   "dependencies": {
     "apollo-client": "^1.4.2",
     "graphql-tag": "^2.3.0",
+    "jquery": "^3.2.1",
+    "lokka": "^1.7.0",
+    "lokka-transport-http": "^1.6.1",
     "react": "^15.6.1",
     "react-apollo": "^1.4.2",
     "react-dom": "^15.6.1",
