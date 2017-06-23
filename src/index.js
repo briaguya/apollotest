@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ListPage from './components/ListPage';
 import Login from './components/Login';
+import NewStatusUpdate from './components/NewStatusUpdate';
 import auth from './services/auth';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
@@ -35,7 +36,8 @@ ReactDOM.render((
     <Router>
       <div>
         <Route path='/' component={ListPage} />
-        <Route path="/login" component={Login}/>
+        <Route path="/login" component={Login}/> 
+        <Route path="/newstatusupdate" component={NewStatusUpdate}/>
       </div>
     </Router>
   </ApolloProvider>

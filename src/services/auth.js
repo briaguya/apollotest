@@ -4,7 +4,7 @@ function authMutation() {
   // GraphQL requires double-quoted strings in the query:
   return `
     mutation {
-      authenticate(input: {email: "srffffv@double.trouble", password: "texasfloods"}) {
+      authenticate(input: {email: "srv@double.trouble", password: "texasfloods"}) {
         jwtToken
       }
     }

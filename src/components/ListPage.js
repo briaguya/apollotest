@@ -37,7 +37,14 @@ query allCrossings {
         id
         name
         latestStatus {
-          status
+          statusByStatusId {
+            name
+          }
+          personByAuthorId {
+            id
+            firstName
+            lastName
+          }
         }
       }
     }

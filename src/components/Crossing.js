@@ -11,7 +11,7 @@ class Crossing extends React.Component {
           {this.props.crossing.name}&nbsp;
         </div>
         <div className='pt3'>
-          {this.props.crossing.latestStatus.status}&nbsp;
+          {this.props.crossing.latestStatus.statusByStatusId.name}&nbsp;
         </div>
       </div>
     );
