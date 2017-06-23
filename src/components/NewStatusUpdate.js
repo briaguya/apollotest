@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+import { gql, graphql, compose } from 'react-apollo';
 
 class NewStatusUpdate extends Component {
   state = {
     redirectToReferrer: false,
-    crossings: [],
+    crossingId: '',
     password: ''
   }
 
-  handleUserChange(e) {
-    this.setState({username: e.target.value});
+  handleCrossingChange(e) {
+    this.setState({crossingId: e.value});
   }
 
   handlePasswordChange(e) {
@@ -42,10 +44,11 @@ class NewStatusUpdate extends Component {
   render() {
     return (
       <div>
-        <input type="text"
-               value={this.state.username}
-               placeholder="Username"
-               onChange={this.handleUserChange.bind(this)}/>
+        <Select
+          name="form-field-name"
+          options={this.props.data.loading ? null : this.props.data.allCrossings.edges.map((crossing) => {return {value: crossing.node.id, label: crossing.node.name}})}
+          onChange={this.handleCrossingChange.bind(this)}
+        />
         <input type="password"
                value={this.state.password}
                placeholder="Password"
@@ -72,4 +75,17 @@ const createStatusUpdate = gql`
   }
 `;
 
-export default graphql(createStatusUpdate)(NewStatusUpdate);
+const getCrossingNames = gql`
+  {
+    allCrossings {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+export default compose(graphql(createStatusUpdate),graphql(getCrossingNames))(NewStatusUpdate);

@@ -30,26 +30,26 @@ class ListPage extends React.Component {
 }
 
 const FeedQuery = gql`
-query allCrossings {
-  allCrossings {
-    edges {
-      node {
-        id
-        name
-        latestStatus {
-          statusByStatusId {
-            name
-          }
-          personByAuthorId {
-            id
-            firstName
-            lastName
+  query allCrossings {
+    allCrossings {
+      edges {
+        node {
+          id
+          name
+          latestStatus {
+            statusByStatusId {
+              name
+            }
+            personByAuthorId {
+              id
+              firstName
+              lastName
+            }
           }
         }
       }
     }
   }
-}
 `;
 
 export default graphql(FeedQuery)(ListPage);

@@ -12,6 +12,7 @@
     "react-apollo": "^1.4.2",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
+    "react-select": "^1.0.0-rc.5",
     "tachyons": "^4.7.4"
   },
   "devDependencies": {
