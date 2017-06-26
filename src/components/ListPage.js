@@ -10,7 +10,10 @@ class ListPage extends React.Component {
       return (<div>Loading</div>)
     }
 
-    console.log(this.props.data.allCrossings);
+    if (this.props.data.allCrossings == null) {
+      // TODO: add error logging
+      return (<div>Error Loading Crossings</div>);
+    }
 
     return (
       <div className='w-100 flex justify-center'>

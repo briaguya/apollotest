@@ -7,20 +7,20 @@ class NewStatusUpdate extends Component {
   state = {
     redirectToReferrer: false,
     crossingId: '',
-    password: ''
+    statusId: ''
   }
 
   handleCrossingChange(e) {
     this.setState({crossingId: e.value});
   }
 
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+  handleStatusChange(e) {
+    this.setState({statusId: e.value});
   }
 
   handleSubmit(e) {
     this.props.mutate({
-      variables: { statusId: 1, crossingId: 1, authorId: 1 }
+      variables: { statusId: this.state.statusId, crossingId: this.state.crossingId, authorId: 1 }
     })
       .then(({ data }) => {
         console.log('got data', data);
@@ -45,15 +45,18 @@ class NewStatusUpdate extends Component {
     return (
       <div>
         <Select
-          name="form-field-name"
+          name="select-crossing"
+          value={this.state.crossingId}
           options={this.props.data.loading ? null : this.props.data.allCrossings.edges.map((crossing) => {return {value: crossing.node.id, label: crossing.node.name}})}
           onChange={this.handleCrossingChange.bind(this)}
         />
-        <input type="password"
-               value={this.state.password}
-               placeholder="Password"
-               onChange={this.handlePasswordChange.bind(this)}/>
-        <button onClick={this.handleSubmit.bind(this)}/>
+        <Select
+          name="select-status"
+          value={this.state.statusId}
+          options={this.props.data.loading ? null : this.props.data.allStatuses.nodes.map((status) => {return {value: status.id, label: status.name}})}
+          onChange={this.handleStatusChange.bind(this)}
+        />
+        <button onClick={this.handleSubmit.bind(this)}>Update Status</button>
       </div>
     );
   }
@@ -75,7 +78,7 @@ const createStatusUpdate = gql`
   }
 `;
 
-const getCrossingNames = gql`
+const getDropdownData = gql`
   {
     allCrossings {
       edges {
@@ -85,7 +88,13 @@ const getCrossingNames = gql`
         }
       }
     }
+    allStatuses {
+      nodes {
+        id,
+        name
+      }
+    }
   }
 `;
 
-export default compose(graphql(createStatusUpdate),graphql(getCrossingNames))(NewStatusUpdate);
+export default compose(graphql(createStatusUpdate),graphql(getDropdownData))(NewStatusUpdate);
